@@ -25,17 +25,20 @@ ggplot(data =penguins,
 
 
 
-
-
-#Data
-library(remotes)
-remotes::install_github("allisonhorst/palmerpenguins")
-library(palmerpenguins)
-library(tidyverse)
+##Data
+#library(remotes)
+#remotes::install_github("allisonhorst/palmerpenguins")
+#library(palmerpenguins)
+#library(tidyverse)
 
 #Variable class
 class(penguins$sex)
 class(penguins$body_mass_g)
+class(penguins$species)
+class(penguins$island)
+class(penguins$flipper_length_mm)
+class(penguins$bill_length_mm)
+class(penguins$bill_depth_mm)
 
 #Variable levels
 levels(penguins$sex)
@@ -63,5 +66,50 @@ penguins %>%
   theme_minimal() +
   labs(title = 'Data Gap Frequency by Variable')
 
+
+# Bar graph counts
+penguins %>%
+  count(species) %>%
+  ggplot() + geom_col(aes(x = species, y = n, fill = species)) + 
+  geom_label(aes(x = species, y = n, label = n)) + 
+  scale_fill_manual(values = c("grey","green","black")) +
+  theme_minimal() + 
+  labs (title = 'Graph of Species Frequency')
+
+
+penguins %>%
+  #group_by(species) %>%
+  count(species) %>%
+  ggplot(aes(x = species, y = n)) + geom_col(fill = species) +
+ #//////////////////////////////////////////slide 14//////////////////////////////////////// geom_label(aes(label = NA_count)) +
+  scale_fill_manual(values = c("darkorange","purple","cyan4")) +
+  theme_minimal() +
+  labs(title = 'Data Gap Frequency by Variable')
+
+
+
+
+#Variable class
+class(penguins$sex)
+class(penguins$body_mass_g)
+class(penguins$species)
+class(penguins$island)
+class(penguins$flipper_length_mm)
+class(penguins$bill_length_mm)
+class(penguins$bill_depth_mm)
+
+
+levels(penguins$sex)
+levels(penguins$body_mass_g)
+levels(penguins$species)
+levels(penguins$island)
+levels(penguins$flipper_length_mm)
+levels(penguins$bill_length_mm)
+levels(penguins$bill_depth_mm)
+
 #Summary
 summary(penguins)
+
+summary(penguins$sex)
+summary(penguins$island)
+summary(penguins$body_mass_g)
